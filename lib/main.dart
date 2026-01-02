@@ -16,10 +16,21 @@ class MyApp extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: const TextField(
-            decoration: const InputDecoration(
-              labelText: 'Add a todo',
-            ),
+          child: Row(
+            children: [
+              Expanded(
+                child: const TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Add a todo',
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('ADD'),
+              ),
+            ],
           ),
         ),
       ),
