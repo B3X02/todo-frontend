@@ -14,8 +14,13 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Todo App'),
         ),
-        body: Center(
-          child: Text('Hello Flutter'),
+        body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: const TextField(
+            decoration: const InputDecoration(
+              labelText: 'Add a todo',
+            ),
+          ),
         ),
       ),
     );
