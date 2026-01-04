@@ -4,8 +4,16 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  String typedText = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +27,22 @@ class MyApp extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: const TextField(
+                child: TextField(
                   decoration: InputDecoration(
                     labelText: 'Add a todo',
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      typedText = value;
+                    });
+                  },
                 ),
               ),
               const SizedBox(width: 8),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  print(typedText);
+                },
                 child: const Text('ADD'),
               ),
             ],
