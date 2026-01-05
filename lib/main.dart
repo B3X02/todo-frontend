@@ -13,37 +13,64 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String typedText = '';
-
+  List<String> todos = [];
+  bool darkMode = false;
+  final TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.dark,
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Todo App'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: Row(
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: 'Add a todo',
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        labelText: 'Add a todo',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          typedText = value;
+                        });
+                      },
+                    ),
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      typedText = value;
-                    });
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (typedText.isNotEmpty) {
+                        setState(() {
+                          todos.add(typedText);
+                          typedText = '';
+                          _controller.clear();
+                        });
+                      }
+                    },
+                    child: const Text('ADD'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: todos.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(todos[index]),
+                    );
                   },
                 ),
-              ),
-              const SizedBox(width: 8),
-              ElevatedButton(
-                onPressed: () {
-                  print(typedText);
-                },
-                child: const Text('ADD'),
               ),
             ],
           ),
