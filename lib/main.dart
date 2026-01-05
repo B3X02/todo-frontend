@@ -26,9 +26,11 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Todo App'),
+          //backgroundColor: const Color.fromARGB(255, 4, 0, 255),
+          centerTitle: true,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
           child: Column(
             children: [
               Row(
@@ -38,6 +40,10 @@ class _MyAppState extends State<MyApp> {
                       controller: _controller,
                       decoration: InputDecoration(
                         labelText: 'Add a todo',
+                        //hintText: 'e.g. Go Shopping ...'
+                        //suffixIcon: Icon(Icons.add)
+                        //filled: true,
+                        //fillColor: const Color.fromARGB(255, 0, 0, 0),
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -66,8 +72,11 @@ class _MyAppState extends State<MyApp> {
                 child: ListView.builder(
                   itemCount: todos.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(todos[index]),
+                    return Card( // Card instead of ListTile
+                      child: Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text(todos[index]),
+                      ),
                     );
                   },
                 ),
